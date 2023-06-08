@@ -17,8 +17,8 @@
         height: 100%;
       }
 
-      #Video1 {
-        width: 3000px;
+      img {
+        width: 100%;
       }
 
     </style>
@@ -31,11 +31,11 @@
       for (let i = 1; i < 360; i++) {
         var image = new Image()
         if (i < 10) {
-          image.src = "../static/frames2/thumb00" + i + ".jpg";
+          image.src = "../static/frames3/output00" + i + ".jpg";
         } else if (i < 100) {
-          image.src = "../static/frames2/thumb0" + i + ".jpg";
+          image.src = "../static/frames3/output0" + i + ".jpg";
         } else {
-          image.src = "../static/frames2/thumb" + i + ".jpg";
+          image.src = "../static/frames3/output" + i + ".jpg";
         }
         images.push(image);
       }
@@ -50,21 +50,22 @@
         console.log(interval_id);
         // preload image
         if (i >= 360) {
-          clearInterval(interval_id);
+          i = 1;
+          // clearInterval(interval_id);
         } else {
           var image = images[i - 1];
           document.querySelector('img').replaceWith(image);
         }
         i = i + 1;
       }
-
-      setTimeout(() => {interval_id = setInterval(timed, 10);}, 3000);
+      
+      interval_id = setInterval(timed, 10);
     })
 
   </script>
 <body>        
 
-  <img src="https://www.w3schools.com/howto/img_fjords.jpg"/>
+  <img src="../static/frames3/output001.jpg"/>
 
 </body>
 

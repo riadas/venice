@@ -10,7 +10,7 @@ images = []
 plt.axis('off')
 img = None
 
-for f in os.listdir(dir_):
+for f in sorted(os.listdir(dir_)[:25]):
    print("wow")
    print(f)
    im = plt.imread(dir_ + f)
@@ -20,8 +20,8 @@ for im in images:
    print("wow2")
    if img is None:
       img = plt.imshow(im)
-      plt.pause(0.5)
+      plt.pause(0.1)
    else:
       img.set_data(im)
-      plt.pause(0.5)
+      plt.pause(0.05)
    plt.draw()

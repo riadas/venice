@@ -1,0 +1,100 @@
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Causal Discovery App</title>
+    <style>
+
+      body {
+        font-family: "Helvetica";
+        margin: 0;
+        height: 100%;
+      }
+
+      html {
+        height: 100%;
+      }
+
+      img {
+        width: 100%;
+      }
+
+    </style>
+  </head>
+  <script type="text/javascript">
+
+    document.addEventListener("DOMContentLoaded", function() {
+      // BEGIN MOUSE HANDLING
+      var mousePos;
+
+      document.onmousemove = handleMouseMove;
+      function handleMouseMove(event) {
+        var dot, eventDoc, doc, body, pageX, pageY;
+
+        event = event || window.event; // IE-ism
+
+        // If pageX/Y aren't available and clientX/Y are,
+        // calculate pageX/Y - logic taken from jQuery.
+        // (This is to support old IE)
+        if (event.pageX == null && event.clientX != null) {
+            eventDoc = (event.target && event.target.ownerDocument) || document;
+            doc = eventDoc.documentElement;
+            body = eventDoc.body;
+
+            event.pageX = event.clientX +
+              (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+              (doc && doc.clientLeft || body && body.clientLeft || 0);
+            event.pageY = event.clientY +
+              (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
+              (doc && doc.clientTop  || body && body.clientTop  || 0 );
+        }
+
+        mousePos = {
+            x: event.pageX,
+            y: event.pageY
+        };
+      }
+
+      var images = [];
+      for (let i = 1; i <= 360; i++) {
+        var image = new Image()
+        if (i < 10) {
+          image.src = "../static/frames3/output00" + i + ".jpg";
+        } else if (i < 100) {
+          image.src = "../static/frames3/output0" + i + ".jpg";
+        } else {
+          image.src = "../static/frames3/output" + i + ".jpg";
+        }
+        images.push(image);
+      }
+
+      var i = 180;
+      var interval_id = -1;
+
+      function timed() {
+        console.log("timed() call");
+        console.log(i)
+        console.log(interval_id);
+        // preload image
+        console.log("mousePos");
+        console.log(mousePos);
+        i = Math.min(360, Math.max(1, Math.round(360 * mousePos.x/window.innerWidth)));
+        console.log(i);
+        var image = images[i - 1];
+        document.querySelector('img').replaceWith(image);
+      
+      }
+      
+      interval_id = setInterval(timed, 10);
+    })
+
+  </script>
+<body>        
+
+  <img src="../static/frames3/output180.jpg"/>
+
+</body>
+
+</html>
