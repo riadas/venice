@@ -1,0 +1,71 @@
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Causal Discovery App</title>
+    <style>
+
+      body {
+        font-family: "Helvetica";
+        margin: 0;
+        height: 100%;
+      }
+
+      html {
+        height: 100%;
+      }
+
+      #Video1 {
+        width: 3000px;
+      }
+
+    </style>
+  </head>
+  <script type="text/javascript">
+
+    document.addEventListener("DOMContentLoaded", function() {
+
+      var images = [];
+      for (let i = 1; i < 360; i++) {
+        var image = new Image()
+        if (i < 10) {
+          image.src = "../static/frames2/thumb00" + i + ".jpg";
+        } else if (i < 100) {
+          image.src = "../static/frames2/thumb0" + i + ".jpg";
+        } else {
+          image.src = "../static/frames2/thumb" + i + ".jpg";
+        }
+        images.push(image);
+      }
+
+      var i = 1;
+      var interval_id = -1;
+      // wait 2 seconds
+
+      function timed() {
+        console.log("timed() call");
+        console.log(i)
+        console.log(interval_id);
+        // preload image
+        if (i >= 360) {
+          clearInterval(interval_id);
+        } else {
+          var image = images[i - 1];
+          document.querySelector('img').replaceWith(image);
+        }
+        i = i + 1;
+      }
+
+      setTimeout(() => {interval_id = setInterval(timed, 10);}, 3000);
+    })
+
+  </script>
+<body>        
+
+  <img src="https://www.w3schools.com/howto/img_fjords.jpg"/>
+
+</body>
+
+</html>
