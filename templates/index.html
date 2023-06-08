@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Causal Discovery App</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.55.0/mode/erlang/erlang.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.56.0/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.56.0/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.56.0/addon/scroll/simplescrollbars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.56.0/addon/selection/active-line.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.55.0/theme/erlang-dark.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.56.0/addon/scroll/simplescrollbars.min.css" />
+
+    <!-- <script src="{{ url_for('static', filename='node_modules/s-expression/index.js')}}" type="module"></script> -->
+
+    <style>
+
+      body {
+        font-family: "Helvetica";
+        margin: 0;
+        height: 100%;
+      }
+
+      html {
+        height: 100%;
+      }
+
+      #Video1 {
+        width: 3000px;
+      }
+
+    </style>
+  </head>
+  <script type="text/javascript">
+
+    function vidplay() {
+       var video = document.getElementById("Video1");
+       var button = document.getElementById("play");
+       if (video.paused) {
+          video.play();
+          console.log("video.currentTime");
+          console.log(video.currentTime);
+          button.textContent = "||";
+       } else {
+          video.pause();
+          button.textContent = ">";
+       }
+    }
+
+    function restart() {
+        var video = document.getElementById("Video1");
+        video.currentTime = 0;
+    }
+
+    function skip(value) {
+        var video = document.getElementById("Video1");
+        console.log("PRE video.currentTime");
+        console.log(video.currentTime);
+        video.currentTime += value;
+        console.log("POST video.currentTime");
+        console.log(video.currentTime);
+
+    }      
+  </script>
+<body>        
+
+<video id="Video1" >
+//  Replace these with your own video files. 
+     <source src="../static/20_again.mp4" type="video/mp4" />
+     HTML5 Video is required for this example. 
+     <a href="../static/20_again.mp4">Download the video</a> file. 
+</video>
+
+<div id="buttonbar">
+    <button id="restart" onclick="restart();">[]</button> 
+    <button id="rew" onclick="skip(-0.5)">&lt;&lt;</button>
+    <button id="play" onclick="vidplay()">&gt;</button>
+    <button id="fastFwd" onclick="skip(0.5)">&gt;&gt;</button>
+</div>         
+</body>
+
+</html>
